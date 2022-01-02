@@ -1,30 +1,24 @@
 class Solution {
+private:
+   int get_max_coins(vector<int>& nums, int i, int j, vector<vector<int>>& max_coins){
+       if(i >= j)    return 0;
+       if(max_coins[i][j] != -1)    return max_coins[i][j];
+       int max_coin_value = INT_MIN;
+       for(int k = i ; k < j; k++){
+           int coin_for_split_at_k = get_max_coins(nums, i, k, max_coins) + (nums[i - 1] * nums[k] * nums[j]) + get_max_coins(nums, k + 1, j, max_coins);
+           max_coin_value = max(max_coin_value, coin_for_split_at_k);
+       }
+       max_coins[i][j] = max_coin_value;
+       return max_coin_value;
+   } 
 public:
-int maxCoins(vector<int>& nums) {
-    int N = nums.size();
-    nums.insert(nums.begin(), 1);
-    nums.insert(nums.end(), 1);
-
-    // rangeValues[i][j] is the maximum # of coins that can be obtained
-    // by popping balloons only in the range [i,j]
-    vector<vector<int>> rangeValues(nums.size(), vector<int>(nums.size(), 0));
-    
-    // build up from shorter ranges to longer ranges
-    for (int len = 1; len <= N; ++len) {
-        for (int start = 1; start <= N - len + 1; ++start) {
-            int end = start + len - 1;
-            // calculate the max # of coins that can be obtained by
-            // popping balloons only in the range [start,end].
-            // consider all possible choices of final balloon to pop
-            int bestCoins = 0;
-            for (int final = start; final <= end; ++final) {
-                int coins = rangeValues[start][final-1] + rangeValues[final+1][end]; // coins from popping subranges
-                coins += nums[start-1] * nums[final] * nums[end+1]; // coins from final pop
-                if (coins > bestCoins) bestCoins = coins;
-            }
-            rangeValues[start][end] = bestCoins;
-        }
+    int maxCoins(vector<int>& nums) {
+        nums.insert(nums.begin(), 1);
+        nums.insert(nums.end(), 1);
+        int n = nums.size();
+        //dp[i][j] in here means, the maximum coins we get after we burst all the balloons between i and j in the original array.
+        vector<vector<int>> max_coins(n, vector<int>(n, -1));
+        //1 is inclusive , n - 1 exclusive
+        return get_max_coins(nums, 1, n - 1, max_coins);
     }
-    return rangeValues[1][N];
-}
 };
