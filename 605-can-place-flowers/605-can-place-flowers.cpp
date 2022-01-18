@@ -1,18 +1,19 @@
 class Solution {
 public:
     bool canPlaceFlowers(vector<int>& flowerbed, int n) {
-        int prev_seen_one_index = -1;
-        int max_possible = 0, bed_size = flowerbed.size();
-        for(int i = 0; i < bed_size; i++){
-                if(flowerbed[i] == 1){
-                    int flower_count = ((prev_seen_one_index == -1) ? (i - prev_seen_one_index - 1) : (i - prev_seen_one_index - 2) ) / 2;
-                    max_possible += flower_count;
-                    prev_seen_one_index = i;
-                }
+        int count = 1;
+        int result = 0;
+        for(int i = 0; i < flowerbed.size(); i++) {
+            if(flowerbed[i] == 0) {
+                count++;
+            }
+            else {
+                result += (count - 1) / 2;
+                count = 0;
+            }
         }
-        if(prev_seen_one_index == -1)   max_possible = (bed_size + 1) / 2;
-        else    max_possible += (bed_size - prev_seen_one_index - 1) / 2;
-        return (max_possible >= n);
+        if(count != 0) result += count/2;
+        return (result >= n);
     }
 };
 //Test cases:
