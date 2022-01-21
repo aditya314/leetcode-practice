@@ -18,13 +18,13 @@ public:
         int start = 0, max_freq = 0;
         long hash = 0, hash_rollback = modular_exponentiation(random_prime, minSize - 1);
         for(int end = 0; end < s.length(); end++){
-            window_count[s[end]]++;
             if((end - start + 1) > minSize){
                 hash = (hash -  ((s[start] - 'a') * hash_rollback) % MOD) % MOD;
                 window_count[s[start]]--;
                 if(window_count[s[start]] == 0)   window_count.erase(s[start]);
                 start++;
             }
+            window_count[s[end]]++;
             hash = ((hash * random_prime) % MOD + (s[end] - 'a')) % MOD;
             if((end - start + 1) == minSize && window_count.size() <= maxLetters)
                 max_freq = max(max_freq, ++string_occurence[hash]);
