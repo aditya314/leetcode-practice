@@ -10,7 +10,7 @@ private:
             }
         }
         dp[n] = 0;
-        return dp[n];
+        return false;
     }
 public:
     bool winnerSquareGame(int n) {
