@@ -2,7 +2,7 @@ class Solution {
 private:
     bool get_winner(vector<int>& dp, int n){
         if(n == 0)  return false;
-        if(dp[n] != -1)    return (dp[n] == 1) ? true :  false;
+        if(dp[n] != -1)    return dp[n];
         for(int i = 1; i * i <= n; i++){
             if(!get_winner(dp, n - (i * i))){
                 dp[n] = 1;
@@ -10,7 +10,7 @@ private:
             }
         }
         dp[n] = 0;
-        return (dp[n] == 1) ? true : false;
+        return dp[n];
     }
 public:
     bool winnerSquareGame(int n) {
