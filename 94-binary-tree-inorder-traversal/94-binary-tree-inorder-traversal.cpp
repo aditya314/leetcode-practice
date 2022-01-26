@@ -35,17 +35,17 @@ public:
                 curr = curr -> right;
             }
             else{
-                TreeNode* inorder_successor = curr->left;
-                while(inorder_successor->right && inorder_successor->right != curr)
-                        inorder_successor = inorder_successor -> right;
-                if(inorder_successor -> right == NULL){
+                TreeNode* inorder_predecessor = curr->left;
+                while(inorder_predecessor->right && inorder_predecessor->right != curr)
+                        inorder_predecessor = inorder_predecessor -> right;
+                if(inorder_predecessor->right == NULL){
                     //create thread
-                    inorder_successor -> right = curr;
+                    inorder_predecessor->right = curr;
                     curr = curr -> left;
                 }
-                else if(inorder_successor->right == curr){
+                else if(inorder_predecessor->right == curr){
                     //remove thread
-                    inorder_successor -> right = NULL;
+                    inorder_predecessor->right = NULL;
                     traversal.push_back(curr->val);
                     curr = curr -> right;
                 }
