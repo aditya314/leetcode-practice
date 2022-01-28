@@ -22,14 +22,6 @@ public:
         
         int req_radius = 0;
         for(int house :  houses){
-            if(house <= heaters.front()) {
-                req_radius = max(req_radius, heaters.front() - house);
-                continue;
-            }
-            if(house >= heaters.back()) {
-                req_radius = max(req_radius, house - heaters.back());
-                continue;
-            }
             req_radius = max(req_radius, get_min_radius_for_house(house, heaters));
         }    
         return req_radius;
