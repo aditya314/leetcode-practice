@@ -1,4 +1,6 @@
 class StepState{
+private:
+    const int prime = 101;
 public:
     int row, col, steps, threshold;
     StepState(int row, int col, int steps, int threshold){
@@ -7,11 +9,11 @@ public:
         this->steps = steps;
         this->threshold = threshold;
     }
-    string get_hash_code(){
-        return to_string(this->row) + to_string(this->col) + to_string(this->threshold);
+    int get_hash_code(){
+        return (this->row * prime * prime) + (this->col * prime) + this->threshold;
     }
     void print(){
-        //cout<<"row = "<<row<<" col = "<<col<<" steps = "<<steps<<" threshold = "<<threshold<<endl;
+        cout<<"row = "<<row<<" col = "<<col<<" steps = "<<steps<<" threshold = "<<threshold<<endl;
     }
 };
 
@@ -33,7 +35,7 @@ public:
             return shortest_distance;
         
         queue<StepState> q;
-        unordered_set<string> seen_step_state;
+        unordered_set<int> seen_step_state;
         StepState initial_state(0, 0, 0, k);
         q.push(initial_state);
         seen_step_state.insert(initial_state.get_hash_code());
@@ -41,7 +43,7 @@ public:
         while(!q.empty()){
             StepState curr_state = q.front();
             q.pop();
-            curr_state.print();
+            //curr_state.print();
             if(curr_state.row == n - 1 && curr_state.col == m - 1)
                 return curr_state.steps;
             for(int dir = 0; dir < 4; dir++){
@@ -50,7 +52,7 @@ public:
                 if(is_valid(i, j, n, m)){
                     int new_threshold = curr_state.threshold - grid[i][j];
                     StepState child_state(i, j, curr_state.steps + 1, new_threshold);
-                    string child_hash_code = child_state.get_hash_code();
+                    int child_hash_code = child_state.get_hash_code();
                     if(new_threshold >= 0 && 
                        seen_step_state.find(child_hash_code) == seen_step_state.end()){
                         q.push(child_state);
