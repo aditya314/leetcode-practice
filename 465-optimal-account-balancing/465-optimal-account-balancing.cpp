@@ -1,15 +1,15 @@
 class Solution {
 private:
-   int settle_expense_with_min_transfer_backtrack(vector<int>& balances, int i){
+   int settle_expense_with_min_transfer_backtrack(vector<int>& balances, int settle_index){
        int n = balances.size();
-       while(i < n && balances[i] == 0)     i++;
+       while(settle_index < n && balances[settle_index] == 0)     settle_index++;
        int min_transfer = INT_MAX;
-       for(int settle_index = i; settle_index < n; settle_index++){
-           if(balances[settle_index] * balances[i] < 0){
-               balances[settle_index] += balances[i];
+       for(int j = settle_index; j < n; j++){
+           if(balances[settle_index] * balances[j] < 0){
+               balances[j] += balances[settle_index];
                min_transfer = min(min_transfer,
-                                  1 + settle_expense_with_min_transfer_backtrack(balances, i + 1));
-               balances[settle_index] -= balances[i];
+                                  1 + settle_expense_with_min_transfer_backtrack(balances, settle_index + 1));
+               balances[j] -= balances[settle_index];
            }
        }
        return (min_transfer == INT_MAX) ? 0 : min_transfer;
