@@ -11,9 +11,7 @@ private:
         int side_D_square = get_distance_square(points[3], points[0]);
         int diagonal_M_square = get_distance_square(points[0], points[2]);
         int diagonal_N_square = get_distance_square(points[1], points[3]);
-        return  side_A_square > 0 && side_B_square > 0 
-                    && side_C_square > 0 && side_D_square > 0
-                        && diagonal_M_square > 0 && diagonal_N_square > 0 
+        return  side_A_square > 0 && diagonal_N_square > 0 
                 && side_A_square == side_B_square
                     && side_B_square == side_C_square
                         && side_C_square == side_D_square
