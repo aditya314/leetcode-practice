@@ -8,11 +8,8 @@ public:
     }
     
     bool shouldPrintMessage(int timestamp, string message) {
-        if(message_logs.find(message) == message_logs.end()){
-            message_logs[message] = timestamp;
-            return true;
-        }
-        if(timestamp - message_logs[message] >= time_limit){
+        if(message_logs.find(message) == message_logs.end() ||
+                (timestamp - message_logs[message] >= time_limit)){
             message_logs[message] = timestamp;
             return true;
         }
