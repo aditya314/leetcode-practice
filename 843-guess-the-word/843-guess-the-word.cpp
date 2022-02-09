@@ -16,9 +16,10 @@ private:
     }
 public:
     void findSecretWord(vector<string>& wordlist, Master& master) {
-        random_shuffle(wordlist.begin(), wordlist.end());
+        //random_shuffle(wordlist.begin(), wordlist.end());
         for (int i = 0; i < 10; ++i) {
-            string guess = wordlist[0];
+            //string guess = wordlist[0];
+            string guess = wordlist[rand() % (wordlist.size())];
             int char_match = master.guess(guess);
             vector<string> narrowed_wordlist;
             for (string w : wordlist)
