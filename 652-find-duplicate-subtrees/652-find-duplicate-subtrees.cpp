@@ -15,7 +15,7 @@ private:
     vector<TreeNode*> duplicate_nodes;
     string serialise_tree(TreeNode* root){
         if(!root)   return "# ";
-        string serialised_tree = to_string(root->val) + " " + serialise_tree(root->left) + " " + serialise_tree(root->right) + " ";
+        string serialised_tree = to_string(root->val) + " " + serialise_tree(root->left) + serialise_tree(root->right);
         subtree_freq[serialised_tree]++;
         if(subtree_freq[serialised_tree] == 2)
              duplicate_nodes.push_back(root);
