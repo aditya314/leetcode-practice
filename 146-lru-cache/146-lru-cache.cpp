@@ -89,15 +89,15 @@ public:
     void put(int key, int value) {
         DLLNode* node = cache_map[key];
         if(node == NULL){
+            if(size == cache_capacity){
+                node = evict_from_cache();
+                cache_map.erase(node -> key);
+                size--;
+            }
             node = new DLLNode(key, value);
             add_to_cache_head(node);
             cache_map[key] = node;
             size++;
-            if(size > cache_capacity){
-                node = evict_from_cache();
-                cache_map.erase(node -> key);
-                --size;
-            }
         } 
         else{
             node->value = value;
