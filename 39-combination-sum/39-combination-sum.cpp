@@ -2,10 +2,8 @@ class Solution {
 private:
     void backtrack_solution(vector<int>& candidates, int target, int i, vector<int> combo, vector<vector<int>>& answer){
         if(i == candidates.size()){
-            if(target == 0){
+            if(target == 0)
                 answer.push_back(combo);
-                return;
-            }
             return;
         }
         if(target < 0)  return;
