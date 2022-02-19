@@ -2,6 +2,9 @@ class Solution {
 public:
     int jump(vector<int>& nums) {
         int jumps = 0, n = nums.size();
+        //BFS till second last step
+        //end is last pos of current layer
+        //max reach is last pos of next layer
         for(int i = 0, end = 0, max_reach = 0; end < n - 1; end = max_reach){
             jumps++;
             while(i <= end){
