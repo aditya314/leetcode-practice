@@ -2,6 +2,9 @@ class Solution {
 private:
     int get_min_taps(int n, vector<int>& ranges){
         int l = ranges.size(), tap_count = 0;
+        //BFS till second last step
+        //end is last pos of current layer
+        //max reach is last pos of next layer
         for(int i = 0, end = 0, max_reach = 0; end < n; end = max_reach){
             tap_count++;
             while(i <= end){
