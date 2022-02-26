@@ -1,6 +1,6 @@
 class NodeState{
 private:
-    const int prime = 101;
+    const int prime = 131;
 public:
     int node, visited_node_bitmask;
     NodeState(int node, int visited_node_bitmask){
@@ -8,7 +8,7 @@ public:
         this -> visited_node_bitmask = visited_node_bitmask;
     }
     string get_hash_code(){
-        return to_string(this -> node) + to_string(this -> visited_node_bitmask);
+        return to_string(this -> node) + " " + to_string(this -> visited_node_bitmask);
     }
 };
 class Solution {
