@@ -11,13 +11,12 @@ public:
         for (int num : nums)
             values[num] += num;
 
-        int take = 0, skip = 0;
-        for (int i = 0; i < n; i++) {
-            int takei = skip + values[i];
-            int skipi = max(skip, take);
-            take = takei;
-            skip = skipi;
+        int max_sum_including_current = 0, max_sum_excluding_current = 0, max_sum = 0;
+        for(int i = 0; i < n; i++){
+            max_sum = max(max_sum_including_current, max_sum_excluding_current +  values[i]);
+            max_sum_excluding_current = max_sum_including_current;
+            max_sum_including_current = max_sum;
         }
-        return max(take, skip); 
+        return max_sum;
     }
 };
