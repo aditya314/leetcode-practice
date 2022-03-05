@@ -6,6 +6,7 @@ class Solution {
 public:
     int deleteAndEarn(vector<int>& nums) {
         int n = 10001;
+        //If you take a number, you might as well take them all.
         vector<int> values(n, 0);
         for (int num : nums)
             values[num] += num;
