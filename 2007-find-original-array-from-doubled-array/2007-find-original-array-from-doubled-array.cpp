@@ -3,14 +3,14 @@ public:
     vector<int> findOriginalArray(vector<int>& changed) {
         if(changed.size() % 2 == 1) 
             return {};
-        map<int, int> num_freq;
+        unordered_map<int, int> num_freq;
         for (int a : changed) 
             num_freq[a]++;
         
         vector<int> unique_keys;
         for (pair<int, int> it : num_freq)
             unique_keys.push_back(it.first);
-        //sort(unique_keys.begin(), unique_keys.end(), [](int i, int j) {return abs(i) < abs(j);});
+        sort(unique_keys.begin(), unique_keys.end(), [](int i, int j) {return abs(i) < abs(j);});
         
         vector<int> answer;
         for (int x : unique_keys) {
