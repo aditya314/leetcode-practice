@@ -14,7 +14,7 @@ public:
             if(char_freq.find(guess[i]) != char_freq.end()){
                 if(guess[i] == secret[i]){
                     bulls++;
-                    //secret[i] is used up, remove extra cow
+                    //guess[i] is used up, remove extra cow
                     if(char_freq[guess[i]] <= 0)
                         cows--;
                 }
