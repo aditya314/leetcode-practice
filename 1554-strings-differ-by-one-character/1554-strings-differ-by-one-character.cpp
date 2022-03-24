@@ -10,7 +10,7 @@ public:
                 if(i > 0) 
                     regex[i - 1] = word[i - 1];
                 regex[i] = '*';
-                if(regex_set.find(regex) != regex_set.end())
+                if(regex_set.count(regex))
                     return true;
                 regex_set.insert(regex);
             }
