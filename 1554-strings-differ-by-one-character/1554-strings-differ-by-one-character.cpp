@@ -6,13 +6,12 @@ public:
         for(string word : dict) {
             string regex = word;
             for(int i = 0; i < word.size(); i++) {
-                //resetting previous '*'
-                if(i > 0) 
-                    regex[i - 1] = word[i - 1];
                 regex[i] = '*';
                 if(regex_set.find(regex) != regex_set.end())
                     return true;
                 regex_set.insert(regex);
+                //resetting the '*'
+                regex[i] = word[i];
             }
         }
         return false;
