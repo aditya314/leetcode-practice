@@ -1,4 +1,7 @@
 class UndergroundSystem {
+    //Time O(1) all operations
+    //Space  O(P + S^2), where S is the number of stations on the network, and P is the number of passengers making a journey concurrently during peak time
+    // Over time, we could reasonably expect every possible pair of the S stations on the network to have an entry in this HashMap, which would be O(S^2)
 private:
     class CheckIn{
         public:
@@ -11,8 +14,12 @@ private:
             this -> check_in_time = check_in_time;
         }
     };
+    
     class RouteData{
         public:
+        //We can user average time instead og total_time.
+        //The benefit of storing the average-time is that the system will be able to store a lot more data before being affected by overflow (remember, the total-count is always eventually going to be affected).
+        //The downside of storing average-time though is that we need to update it with division every time a new journey is made on that route. This leads to compounded floating-point error.
         double total_time;
         int total_trips;
         RouteData(){
