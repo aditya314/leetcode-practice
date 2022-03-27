@@ -15,7 +15,8 @@ public:
     
     string back(int steps) {
         while(steps > 0 && history.size() > 1) { 
-            // Always keep at least one element in the stack. 
+            // Always keep at least one element in the stack.
+            //which is the page that you are currently at.
             future.push(history.top());
             history.pop();
             steps--;
