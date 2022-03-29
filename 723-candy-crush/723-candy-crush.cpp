@@ -54,6 +54,7 @@ private:
         }
     }
 public:
+    //It's O((R*C)^2) complexity because each function call scans the board three times so it's 3(R*C). If we only crush 3 candies each time, the function will be called (R*C)/3 times. Multiply those two terms together you get O((R*C)^2)
     vector<vector<int>> candyCrush(vector<vector<int>>& board) {
         this -> n = board.size();
         this -> m = board[0].size();
