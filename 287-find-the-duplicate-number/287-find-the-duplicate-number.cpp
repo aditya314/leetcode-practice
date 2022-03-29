@@ -1,18 +1,32 @@
 class Solution {
-public:
+    public:
+    //time O(nlogn) alternative to soring
     int findDuplicate(vector<int>& nums) {
-        if(nums.empty())  return -1;
-        int hare = nums[0], tortoise = nums[0];
-        do {
-            hare = nums[nums[hare]];
-            tortoise = nums[tortoise];
-        } while(hare != tortoise);
+
+        // Lambda function to count how many numbers are less than or equal to 'cur'
+        auto small_or_equal = [&](int cur) {
+            int count = 0;
+            for (auto &num: nums) {
+                if (num <= cur)
+                    count++;
+            }
+            return count;
+        };
         
-        tortoise = nums[0];
-        while(hare != tortoise){
-            hare = nums[hare];
-            tortoise = nums[tortoise];
+        // 'low' and 'high' represent the range of values of the target
+        int low = 1, high = nums.size();
+        int duplicate = -1;
+        while (low <= high) {
+            int cur = (low + high) / 2;
+            
+            if (small_or_equal(cur) > cur) { 
+                duplicate = cur;
+                high = cur - 1;
+            } else {
+                low = cur + 1;
+            }
         }
-        return hare;
+
+        return duplicate;
     }
 };
