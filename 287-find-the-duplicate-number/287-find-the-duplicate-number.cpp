@@ -1,32 +1,26 @@
 class Solution {
-    public:
-    //time O(nlogn) alternative to soring
+    //To compute the intersection point, let's note that the hare has traversed twice as many nodes as the tortoise, i.e. 2d(tortoise)=d(hare), implying:
+    //2(F + a) = F + nC + a, where n is some integer.
+    //Hence the coordinate of the intersection point is F + a = nC
+    
+    //Let's show that this time they meet at the cycle entrance after FF steps.
+    //The tortoise started at zero, so its position after FF steps is FF.
+    //The hare started at the intersection point F + a = nC, so its position after F steps is nC + F, that is the same point as F.
+    //So the tortoise and the (slowed down) hare will meet at the entrance of the cycle.
+public:
     int findDuplicate(vector<int>& nums) {
-
-        // Lambda function to count how many numbers are less than or equal to 'cur'
-        auto small_or_equal = [&](int cur) {
-            int count = 0;
-            for (auto &num: nums) {
-                if (num <= cur)
-                    count++;
-            }
-            return count;
-        };
+        if(nums.empty())  return -1;
+        int hare = nums[0], tortoise = nums[0];
+        do {
+            hare = nums[nums[hare]];
+            tortoise = nums[tortoise];
+        } while(hare != tortoise);
         
-        // 'low' and 'high' represent the range of values of the target
-        int low = 1, high = nums.size();
-        int duplicate = -1;
-        while (low <= high) {
-            int cur = (low + high) / 2;
-            
-            if (small_or_equal(cur) > cur) { 
-                duplicate = cur;
-                high = cur - 1;
-            } else {
-                low = cur + 1;
-            }
+        tortoise = nums[0];
+        while(hare != tortoise){
+            hare = nums[hare];
+            tortoise = nums[tortoise];
         }
-
-        return duplicate;
+        return hare;
     }
 };
