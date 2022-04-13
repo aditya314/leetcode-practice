@@ -8,17 +8,23 @@ public:
             
             for(int j = col_start; j <= col_end; j++)
                 matrix[row_start][j] = ++num;
+            row_start++;
             
-            for(int i = row_start + 1; i <= row_end; i++)
+            for(int i = row_start; i <= row_end; i++)
                 matrix[i][col_end] = ++num;
+            col_end--;
             
-            for(int j = col_end - 1; j >= col_start; j--)
-                matrix[row_end][j] = ++num;
+            if(col_end >= col_start){
+                for(int j = col_end; j >= col_start; j--)
+                    matrix[row_end][j] = ++num;
+                row_end--;
+            }
             
-            for(int i = row_end - 1; i >= row_start + 1; i--)
+            if(row_end >= row_start){
+                for(int i = row_end; i >= row_start; i--)
                 matrix[i][col_start] = ++num;
-            
-            row_start++;    col_end--; row_end--; col_start++;
+                col_start++;    
+            }
         }
         
         return matrix;
