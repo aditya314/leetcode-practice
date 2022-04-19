@@ -15,10 +15,11 @@ private:
     void find_misplaced_nodes_by_inorder_traverse(TreeNode* root){
         if(!root)   return;
         find_misplaced_nodes_by_inorder_traverse(root -> left);
-        if(first_misplace == nullptr && (prev == nullptr || prev -> val >= root -> val))
-            first_misplace = prev;
-        if(first_misplace && prev -> val >= root -> val) 
+        if(prev && prev -> val >= root -> val){
+            if(!first_misplace)
+                first_misplace = prev;
             second_misplace = root;
+        }
         prev = root;
         find_misplaced_nodes_by_inorder_traverse(root -> right);
     }
