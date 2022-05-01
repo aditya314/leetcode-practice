@@ -26,8 +26,11 @@ public:
             
             if(i >= 0 && j >= 0 && s[i] != t[j])
                 return false;
+            
+            // If expecting to compare char vs nothing
             if((i >= 0 && j < 0) || (i < 0 && j >= 0))
                 return false;
+            
             i--;    j--;
         }
         return true;
