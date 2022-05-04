@@ -1,19 +1,17 @@
 class Solution {
 public:
-    int maxOperations(vector<int>& num, int k) {
-        sort(num.begin(), num.end());
-        int ans = 0, i=0, j=num.size() - 1;
-        while(i < j){
-            if(num[i] + num[j] < k)
-                i++;
-		    else if(num[i] + num[j] > k)
-                j--;
-            else{
+    int maxOperations(vector<int>& nums, int k) {
+        unordered_map<int, int> freq;
+        int ans = 0;
+        for(auto cur: nums){
+            int complement = k - cur;
+            if(freq[complement] > 0){
                 ans++;
-                i++;
-                j--; 
+                freq[complement]--;
             }
-      }
-      return ans;
+            else
+                freq[cur]++;
+        }
+        return ans;
     }
 };
