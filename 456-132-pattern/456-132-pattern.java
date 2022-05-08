@@ -1,7 +1,7 @@
 class Solution {
     public boolean find132pattern(int[] nums) {
         //stack stores candidate 2nd values
-        Stack <Integer> stack = new Stack();
+        ArrayDeque<Integer> stack = new ArrayDeque();
         int second = Integer.MIN_VALUE;
         for (int i = nums.length - 1; i >= 0; i--) {
             if (nums[i] < second)   return true;
