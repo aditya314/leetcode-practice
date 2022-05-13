@@ -12,7 +12,7 @@ class Solution {
     }
     
     private void permute(int[] nums, List<List<Integer>> permutations, int startIndex){
-        if(startIndex == nums.length){
+        if(startIndex == nums.length - 1){
             permutations.add(toList(nums));
             return;
         }
