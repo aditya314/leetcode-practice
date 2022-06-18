@@ -1,4 +1,5 @@
 class WordFilter {
+    //we will insert '#apple', 'e#apple', 'le#apple', 'ple#apple', 'pple#apple', 'apple#apple' into the trie. Then for a query like prefix = "ap", suffix = "le", we can find it by querying our trie for le#ap.
     TrieNode trie;
     public WordFilter(String[] words) {
         trie = new TrieNode();
