@@ -1,4 +1,8 @@
 class Solution {
+    //If a word X is a suffix of Y, then it does not need to be considered, as the encoding of Y in the reference string will also encode X.
+    //If a word Y does not have any other word X (in the list of words) that is a suffix of Y, then Y must be part of the reference string.
+    //Thus, the goal is to remove words from the list such that no word is a suffix of another. The final answer would be sum(word.length + 1 for word in words).
+
     public int minimumLengthEncoding(String[] words) {
         TrieNode trie = new TrieNode();
         Map<TrieNode, Integer> nodes = new HashMap();
